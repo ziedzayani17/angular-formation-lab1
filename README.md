@@ -46,7 +46,88 @@ npm i --save semantic-ui-css
 ng generate component movie
 ```
 
-> Voir le code pour l'implémentation
->
->
+**Modifier MovieComponent pour ajouter les attributs d'un film**
+
+<br>
+
+```js
+  //votes: number;
+  upVote: number;
+  downVote: number;
+  name: string;
+  pays: string;
+  category: string;
+  description: string;
+  releaseDate: Date;
+
+  constructor() { 
+    this.upVote = 4;
+    this.downVote = 2;
+    this.name = "The Matrix";
+    this.pays = "US";
+    this.category = "SF/Action"
+    this.description = "Programmeur anonyme dans un service administratif le jour, Thomas Anderson devient Neo la nuit venue. Sous ce pseudonyme, il est l'un des pirates les plus recherchés du cyber-espace";
+    this.releaseDate = new Date("1999-03-31");
+  }
+
+  voteUp() {
+    this.upVote += 1;
+  }
+    
+  voteDown() {
+   this.downVote += 1;
+  }
+
+```
+
+
+**Utiliser les attributs pour afficher les détails + événement pour modifier les attributs**
+
+<br>
+
+```html
+<div style="    margin-top: 20px;margin-left: auto;margin-right: auto;width: 50%;"class="ui teal segment">
+    <a class="ui red ribbon label">{{name}}</a>
+    <span><strong>{{ category }} </strong></span>
+<div  class="four wide column center aligned votes">
+    <div style="margin: 2em;" class="ui teal circular segment">
+        <div class="value">
+            {{ upVote - downVote }}
+        </div>
+        <div class="label">
+            Points
+        </div>
+    </div>
+    
+<div class="twelve wide column">
+    <span class="ui large header">
+      Description :   
+    </span><p>{{ description }}</p>
+    <h5 class="ui header">Date sortie : {{releaseDate}}</h5> 
+
+
+    <div style="float: right;">
+        <div  class="ui labeled button" tabindex="0">
+            <div class="ui primary button" (click)="voteUp()" >
+            <i class="hand point up icon"></i> J'aime
+            </div>
+            <a class="ui basic label">
+            {{ upVote }}
+            </a>
+        </div>
+
+        <div class="ui labeled button" tabindex="0">
+            <div class="ui secondary button" (click)="voteDown()">
+            <i class="hand point down icon"></i> Je n'aime pas
+            </div>
+            <a class="ui basic label">
+            <p [textContent]="downVote"></p>
+            </a>
+        </div>
+    </div>
+
+</div>
+</div>
+```
+
 
